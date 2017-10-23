@@ -2,7 +2,6 @@ import os
 from os import environ
 
 import dj_database_url
-#from boto.mturk import qualification
 
 import otree.settings
 
@@ -63,7 +62,7 @@ AWS_SECRET_ACCESS_KEY = environ.get('AWS_SECRET_ACCESS_KEY')
 
 
 # e.g. EUR, CAD, GBP, CHF, CNY, JPY
-REAL_WORLD_CURRENCY_CODE = 'USD'
+REAL_WORLD_CURRENCY_CODE = 'EUR'
 USE_POINTS = True
 
 
@@ -134,7 +133,7 @@ mturk_hit_settings = {
 # e.g. self.session.config['participation_fee']
 
 SESSION_CONFIG_DEFAULTS = {
-    'real_world_currency_per_point': 0.00,
+    'real_world_currency_per_point': 1.00,
     'participation_fee': 0.00,
     'doc': "",
     'mturk_hit_settings': mturk_hit_settings,
@@ -142,38 +141,10 @@ SESSION_CONFIG_DEFAULTS = {
 
 SESSION_CONFIGS = [
     {
-        'name': 'imperfect_monitoring',
-        'display_name': "Imperfect Monitoring",
-        'num_demo_participants': 2,
-        'app_sequence': ['imperfect_monitoring', 'payment_info'],
-        'treatment': 'A',
-        'displayed_subperiods': 10,
-        'subperiod_length': 6,
-        'rest_length': 6,
-        'seconds_per_tick': 1,
-        'display_average_a_graph': True,
-        'display_average_b_graph': True,
-        'display_average_ab_graph': False,
-    },
-    {
-        'name': 'bimatrix',
-        'display_name': "Generic Bimatrix Game",
-        'num_demo_participants': 2,
-        'app_sequence': ['bimatrix', 'payment_info'],
-        'config_file': 'demo.csv',
-    },
-    {
-        'name': 'stochastic_bimatrix',
-        'display_name': "Stochastic Bimatrix Game",
-        'num_demo_participants': 2,
-        'app_sequence': ['stochastic_bimatrix', 'payment_info'],
-        'treatment': 'A'
-    },
-    {
-        'name': 'continuous_double_auction',
-        'display_name': "Continuous Double Auction Market",
-        'num_demo_participants': 2,
-        'app_sequence': ['continuous_double_auction', 'payment_info'],
+        'name': 'hackathon_judgement',
+        'display_name': "Hackathon Judgement",
+        'num_demo_participants': 4,
+        'app_sequence': ['hackathon_judgement', 'payment_info'],
     },
 ]
 

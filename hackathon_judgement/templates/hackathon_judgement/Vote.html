@@ -1,0 +1,86 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Vote
+{% endblock %}
+
+{% block styles %}
+
+    <style type="text/css">
+    	.column {
+    		display: flex;
+    		flex-direction: column;
+    		align-items: center;
+    		padding: 0 20px 0 20px;
+    	}
+    	.column h2 {
+    		border-bottom: 1px solid black;
+    		padding-bottom: 0px;
+    		margin-bottom: 20px;
+    	}
+    	.column:not(:last-child) {
+    		border-right: 1px solid #626262;
+    	}
+    	.row {
+    		display: flex;
+    		flex-direction: row;
+    		align-items: center;
+    		height: 34px;
+    		margin-bottom: 15px;
+    	}
+    	.otree-form-errors {
+    		font-size: 2rem;
+    		padding: 1.25rem 1.25rem;
+		    margin-bottom: 1rem;
+		    border: 1px solid transparent;
+		    border-radius: .25rem;
+    		background-color: #f2dede;
+		    border-color: #ebcccc;
+		    color: #a94442;
+    	}
+    </style>
+
+{% endblock %}
+
+{% block content %}
+
+	<div style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+
+		<div style="display: flex; flex-direction: row">
+
+			<div class="column">
+				<h2>Rank</h2>
+				<span class="row">1</span>
+				<span class="row">2</span>
+				<span class="row">3</span>
+			</div>
+
+			<div class="column">
+				<h2>Best Overall</h2>
+			    {% formfield player.best_overall_1 label="" %}
+			    {% formfield player.best_overall_2 label="" %}
+			    {% formfield player.best_overall_3 label="" %}
+			</div>
+
+			<div class="column">
+				<h2>Best Design</h2>
+			    {% formfield player.best_design_1 label="" %}
+			    {% formfield player.best_design_2 label="" %}
+			    {% formfield player.best_design_3 label="" %}
+			</div>
+
+			<div class="column">
+				<h2>Most Original</h2>
+			    {% formfield player.most_original_1 label="" %}
+			    {% formfield player.most_original_2 label="" %}
+			    {% formfield player.most_original_3 label="" %}
+			</div>
+
+		</div>
+
+	</div>
+
+    {% next_button %}
+
+{% endblock %}
