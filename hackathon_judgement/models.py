@@ -4,6 +4,8 @@ from otree.constants import BaseConstants
 from otree.models import BaseGroup, BasePlayer, BaseSubsession
 from collections import defaultdict
 
+import math
+
 doc = """
 """
 
@@ -13,9 +15,14 @@ class Constants(BaseConstants):
     players_per_group = None
     num_rounds = 1
     project_names = [
-        'foo',
-        'bar',
-        'baz',
+        'project_1',
+        'project_2',
+        'project_3',
+        'project_4',
+        'project_5',
+        'project_6',
+        'project_7',
+        'project_8',
     ]
 
 
@@ -29,12 +36,27 @@ class Group(BaseGroup):
     most_original = models.CharField(max_length=100, choices=Constants.project_names)
 
     def calculate_winners(self):
-        votes = defaultdict(lambda: [])
+        votes_by_player = defaultdict(lambda: defaultdict(lambda: []))
         for player in self.get_players():
             for category in ['best_overall', 'best_design', 'most_original']:
                 for rank in [1, 2, 3]:
                     vote = getattr(player, '{}_{}'.format(category, rank))
-                    votes[player].append(vote)
+                    votes_by_player[category][player].append(vote)
+
+        for category in ['best_overall', 'best_design', 'most_original']:
+            setattr(self, category, self.run_election(votes_by_player[category]))
+
+    def run_election(self, votes):
+        num_voters = len(votes.keys())
+        plurality = math.ceil(num_voters / 2)
+        votes_by_candidate = {
+            candidate: sum([1 for ranks in votes.values() if candidate == ranks[0]])
+            for candidate in Constants.project_names
+        }
+        for candidate in Constants.project_names:
+            if votes_by_candidate[candidate] >= plurality:
+                return candidate
+        return None
 
 
 class Player(BasePlayer):
@@ -49,9 +71,6 @@ class Player(BasePlayer):
     most_original_3 = models.CharField(max_length=100, choices=Constants.project_names)
 
     def set_payoff(self):
-        if self.id_in_group == 1:
-            self.group.calculate_winners()
-
         self.payoff = 0
         for category in ['best_overall', 'best_design', 'most_original']:
             winner = getattr(self.group, category)

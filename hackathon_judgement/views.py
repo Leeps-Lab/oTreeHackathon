@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from otree.views import Page
+from otree.views import Page, WaitPage
 from . import models
 
 
@@ -33,8 +33,13 @@ class Vote(Page):
         return errs
 
 
-class Results(Page):
+class WaitForVotes(WaitPage):
+    def after_all_players_arrive(self):
+        self.group.calculate_winners()
 
+
+class Results(Page):
+    
     def vars_for_template(self):
         self.player.set_payoff()
         return {}
@@ -43,5 +48,6 @@ class Results(Page):
 page_sequence = [
     Instructions,
     Vote,
+    WaitForVotes,
     Results
 ]
