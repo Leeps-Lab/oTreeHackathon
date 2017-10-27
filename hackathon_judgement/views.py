@@ -23,21 +23,59 @@ class Vote(Page):
         'most_original_3',
     ]
 
-    def get_form(self, *args, **kwargs):
-        best_overall_choices = list(models.Constants.project_names)
-        random.shuffle(best_overall_choices)
-        best_design_choices = list(models.Constants.project_names)
-        random.shuffle(best_design_choices)
-        most_original_choices = list(models.Constants.project_names)
-        random.shuffle(most_original_choices)
+    def best_overall_1_choices(self):
+        random.seed(self.participant.code)
+        choices = list(models.Constants.project_names)
+        random.shuffle(choices)
+        return choices
 
-        default = super().get_form(*args, **kwargs)
-        for i in ['1', '2', '3']:
-            default['best_overall_{}'.format(i)].field.choices = [(None, '---------')] + [(choice, choice) for choice in best_overall_choices]
-            default['best_design_{}'.format(i)].field.choices = [(None, '---------')] + [(choice, choice) for choice in best_design_choices]
-            default['most_original_{}'.format(i)].field.choices = [(None, '---------')] + [(choice, choice) for choice in most_original_choices]
+    def best_overall_2_choices(self):
+        random.seed(self.participant.code)
+        choices = list(models.Constants.project_names)
+        random.shuffle(choices)
+        return choices
+    
+    def best_overall_3_choices(self):
+        random.seed(self.participant.code)
+        choices = list(models.Constants.project_names)
+        random.shuffle(choices)
+        return choices
 
-        return default
+    def best_design_1_choices(self):
+        random.seed(self.participant.code)
+        choices = list(models.Constants.project_names)
+        random.shuffle(choices)
+        return choices
+
+    def best_design_2_choices(self):
+        random.seed(self.participant.code)
+        choices = list(models.Constants.project_names)
+        random.shuffle(choices)
+        return choices
+
+    def best_design_3_choices(self):
+        random.seed(self.participant.code)
+        choices = list(models.Constants.project_names)
+        random.shuffle(choices)
+        return choices
+
+    def most_original_1_choices(self):
+        random.seed(self.participant.code)
+        choices = list(models.Constants.project_names)
+        random.shuffle(choices)
+        return choices
+
+    def most_original_2_choices(self):
+        random.seed(self.participant.code)
+        choices = list(models.Constants.project_names)
+        random.shuffle(choices)
+        return choices
+
+    def most_original_3_choices(self):
+        random.seed(self.participant.code)
+        choices = list(models.Constants.project_names)
+        random.shuffle(choices)
+        return choices
 
     def error_message(self, values):
         errs = []
