@@ -143,7 +143,7 @@ SESSION_CONFIGS = [
     {
         'name': 'hackathon_judgement',
         'display_name': "Hackathon Judgement",
-        'num_demo_participants': 4,
+        'num_demo_participants': 6,
         'app_sequence': ['hackathon_judgement'],
     },
 ]

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from otree.views import Page, WaitPage
 from . import models
+import random
 
 
 class Instructions(Page):
@@ -21,6 +22,22 @@ class Vote(Page):
         'most_original_2',
         'most_original_3',
     ]
+
+    def get_form(self, *args, **kwargs):
+        best_overall_choices = list(models.Constants.project_names)
+        random.shuffle(best_overall_choices)
+        best_design_choices = list(models.Constants.project_names)
+        random.shuffle(best_design_choices)
+        most_original_choices = list(models.Constants.project_names)
+        random.shuffle(most_original_choices)
+
+        default = super().get_form(*args, **kwargs)
+        for i in ['1', '2', '3']:
+            default['best_overall_{}'.format(i)].field.choices = [(None, '---------')] + [(choice, choice) for choice in best_overall_choices]
+            default['best_design_{}'.format(i)].field.choices = [(None, '---------')] + [(choice, choice) for choice in best_design_choices]
+            default['most_original_{}'.format(i)].field.choices = [(None, '---------')] + [(choice, choice) for choice in most_original_choices]
+
+        return default
 
     def error_message(self, values):
         errs = []

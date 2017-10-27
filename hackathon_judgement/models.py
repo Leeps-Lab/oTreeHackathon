@@ -13,8 +13,8 @@ doc = """
 
 class Constants(BaseConstants):
     name_in_url = 'imperfect_monitoring'
-    players_per_group = None
-    num_rounds = 1
+    players_per_group = 3
+    num_rounds = 2
     project_names = [
         'project_1',
         'project_2',
@@ -28,7 +28,9 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession):
-    pass
+
+    def creating_session(self):
+        self.group_randomly()
 
 
 class Group(BaseGroup):
