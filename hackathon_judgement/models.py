@@ -12,9 +12,9 @@ doc = """
 
 
 class Constants(BaseConstants):
-    name_in_url = 'imperfect_monitoring'
-    players_per_group = 3
-    num_rounds = 2
+    name_in_url = 'hackathon_judgement'
+    players_per_group = None
+    num_rounds = 1
     project_names = [
         'project_1',
         'project_2',
