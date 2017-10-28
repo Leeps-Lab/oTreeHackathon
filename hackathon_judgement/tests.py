@@ -14,18 +14,24 @@ class PlayerBot(otree.api.Bot):
                 'best_overall_1': Constants.project_names[0],
                 'best_overall_2': Constants.project_names[1],
                 'best_overall_3': Constants.project_names[2],
-                'best_design_1': Constants.project_names[1],
-                'best_design_2': Constants.project_names[0],
+                'best_overall_4': Constants.project_names[3],
+                'best_overall_5': Constants.project_names[4],
+                'best_design_1': Constants.project_names[0],
+                'best_design_2': Constants.project_names[1],
                 'best_design_3': Constants.project_names[2],
-                'most_original_1': Constants.project_names[2],
-                'most_original_2': Constants.project_names[0],
-                'most_original_3': Constants.project_names[1],
+                'best_design_4': Constants.project_names[3],
+                'best_design_5': Constants.project_names[4],
+                'most_original_1': Constants.project_names[0],
+                'most_original_2': Constants.project_names[1],
+                'most_original_3': Constants.project_names[2],
+                'most_original_4': Constants.project_names[3],
+                'most_original_5': Constants.project_names[4],
         })
 
         assert self.group.best_overall == Constants.project_names[0]
         assert self.group.best_design == Constants.project_names[1]
         assert self.group.most_original == Constants.project_names[2]
-        assert self.player.payoff == 9
+        assert self.player.payoff == 6
 
         assert self.group.run_election({
             1: ['a', 'b', 'c'],

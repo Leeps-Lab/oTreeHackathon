@@ -42,12 +42,23 @@ class Group(BaseGroup):
         votes_by_player = defaultdict(lambda: defaultdict(lambda: []))
         for player in self.get_players():
             for category in ['best_overall', 'best_design', 'most_original']:
-                for rank in [1, 2, 3]:
+                for rank in [1, 2, 3, 4, 5]:
                     vote = getattr(player, '{}_{}'.format(category, rank))
                     votes_by_player[category][player].append(vote)
 
-        for category in ['best_overall', 'best_design', 'most_original']:
-            setattr(self, category, self.run_election(votes_by_player[category]))
+        self.best_overall = self.run_election(votes_by_player['best_overall'])
+        for player in self.get_players():
+            for player in votes_by_player['best_design'].keys():
+                if self.best_overall in votes_by_player['best_design'][player]:
+                    votes_by_player['best_design'][player].remove(self.best_overall)
+        self.best_design = self.run_election(votes_by_player['best_design'])
+        for player in self.get_players():
+            for player in votes_by_player['most_original'].keys():
+                if self.best_overall in votes_by_player['most_original'][player]:
+                    votes_by_player['most_original'][player].remove(self.best_overall)
+                if self.best_design in votes_by_player['most_original'][player]:
+                    votes_by_player['most_original'][player].remove(self.best_design)
+        self.most_original = self.run_election(votes_by_player['most_original'])
 
     def run_election(self, votes):
         num_voters = len(votes.keys())
@@ -99,12 +110,18 @@ class Player(BasePlayer):
     best_overall_1 = models.CharField(max_length=100, choices=Constants.project_names)
     best_overall_2 = models.CharField(max_length=100, choices=Constants.project_names)
     best_overall_3 = models.CharField(max_length=100, choices=Constants.project_names)
+    best_overall_4 = models.CharField(max_length=100, choices=Constants.project_names)
+    best_overall_5 = models.CharField(max_length=100, choices=Constants.project_names)
     best_design_1 = models.CharField(max_length=100, choices=Constants.project_names)
     best_design_2 = models.CharField(max_length=100, choices=Constants.project_names)
     best_design_3 = models.CharField(max_length=100, choices=Constants.project_names)
+    best_design_4 = models.CharField(max_length=100, choices=Constants.project_names)
+    best_design_5 = models.CharField(max_length=100, choices=Constants.project_names)
     most_original_1 = models.CharField(max_length=100, choices=Constants.project_names)
     most_original_2 = models.CharField(max_length=100, choices=Constants.project_names)
     most_original_3 = models.CharField(max_length=100, choices=Constants.project_names)
+    most_original_4 = models.CharField(max_length=100, choices=Constants.project_names)
+    most_original_5 = models.CharField(max_length=100, choices=Constants.project_names)
 
     def set_payoff(self):
         self.payoff = 0
