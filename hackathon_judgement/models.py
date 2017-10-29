@@ -16,14 +16,16 @@ class Constants(BaseConstants):
     players_per_group = None
     num_rounds = 1
     project_names = [
-        'project_1',
-        'project_2',
-        'project_3',
-        'project_4',
-        'project_5',
-        'project_6',
-        'project_7',
-        'project_8',
+        'MTurk Utils',
+        'UI For Realtime oTree',
+        'A widget for submitting ordered preferences over a set of options',
+        'Clicking Paradigm',
+        'A collection of input tools, oriented on the z-Tree layouts',
+        'oTree methods with customizable CSS Style',
+        'Slider Task',
+        'Slider with Immediate Visual Feedback and no initial position',
+        'Treatment Allocation',
+        'Player Classes',
     ]
 
 
